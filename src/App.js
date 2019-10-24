@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
+import { render } from "react-dom";
 import './App.css';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
 import { AgGridReact } from 'ag-grid-react';
+import CustomHeader from "./CustomHeader.jsx";
 
 function App() {
     const [columnDefs, setColumnDefs] = useState([{
-        headerName: "Make", field: "make", resizable: true
+        headerName: "Make", field: "make", resizable: true, sortable: true
     }, {
         headerName: "Model", field: "model", resizable: true
     }, {
@@ -87,6 +89,8 @@ function App() {
         make: "Porsche", model: "Boxter", price: 72000
     }]);
 
+    const [frameworkComponents] = useState({ agColumnHeader: CustomHeader });
+
   return (
     <div className="App">
         <div
@@ -97,6 +101,7 @@ function App() {
         >
             <AgGridReact
                 columnDefs={columnDefs}
+                frameworkComponents={frameworkComponents}
                 rowData={rowData}>
             </AgGridReact>
         </div>
